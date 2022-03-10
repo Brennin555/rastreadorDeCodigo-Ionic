@@ -9,7 +9,8 @@ import { CorreioService } from 'src/app/services/correio.service';
 })
 export class HomePage {
   correio : any = {};
-  eventosCollection: any[] = []
+  eventosCollection: any[] = [];
+  //icone : string = "car";
 
   constructor(private correioService: CorreioService, private toastCtrl: ToastController, private alertCtrl: AlertController) {}
 
@@ -19,9 +20,9 @@ export class HomePage {
     if(codigoObjeto.length<3){
       return;
     }
-
-    this.correioService.localizarObjeto(codigoObjeto)
     
+    this.correioService.localizarObjeto(codigoObjeto)
+
     .then(response=>{
       let correio: any = response;
       
@@ -80,15 +81,41 @@ export class HomePage {
 
     let diaUpdate = dataArrumada[0].split('-')
     diaUpdate[3] = diaUpdate[2] + "/" + diaUpdate[1] + "/" + diaUpdate[0];
-    
-
 
     let horaUpdate = dataArrumada[1].substr(-10,5);
     horaUpdate = horaUpdate.replace(':','h');
     
-    console.log(diaUpdate);
+    //console.log(diaUpdate);
     
     return diaUpdate[3] + ' - ' +horaUpdate;
   }
 
+  async statusObjeto(codigo : string){
+    let icone: string, cor: string = 'success';
+
+    if(codigo == 'BDI'){
+      icone = "checkmark-circle";
+    }
+    else{
+      if(codigo == 'LDI'){
+        icone = "checkmark-circle-outline";
+      }
+      else{
+        icone = "time";
+      }       
+    }
+
+    console.log(icone);
+    return icone;
+  }
+
+  reduzirDescricao(descricao : string){
+    let descricaoNova: string = descricao;
+
+    if(descricao == 'Objeto em trânsito - por favor aguarde'){
+      descricaoNova = descricao.substr(-40,18);
+    }
+
+    return descricaoNova;
+  }
 }

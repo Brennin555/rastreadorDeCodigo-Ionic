@@ -1,25 +1,51 @@
 <ion-header [translucent]="true" class="header">
   <ion-toolbar color="secondary">
     <ion-title>
-      <div class = "correio"><b>CORREIOS</b></div>
+      <div class="correio"><b>CORREIOS</b></div>
     </ion-title>
-    <ion-img class = "correio-img" src="assets/img/correio-simbolo.png" slot="end"></ion-img>
+    <ion-img class="correio-img" src="assets/img/correio-simbolo.png" slot="end"></ion-img>
   </ion-toolbar>
+
   <ion-toolbar color="secondary">
-    <ion-searchbar color = "primary" [(ngModel)] = "nome" placeholder = "Código de rastreio" (ionChange)="localizarObjeto($event)">
+    <ion-searchbar color="primary" [(ngModel)]="nome" placeholder="Código de rastreio"
+      (ionChange)="localizarObjeto($event)">
     </ion-searchbar>
   </ion-toolbar>
+
+  <ion-toolbar color="warning">
+    <ion-title class="title-status" color="primary" slot="start"><b>Status:</b></ion-title>
+    
+    <ion-icon class="icon-status" name= "checkmark-circle-outline" 
+    color="primary" slot="end"  size="large">
+    </ion-icon>
+ 
+  </ion-toolbar>
+
 </ion-header>
 
 <ion-content [fullscreen]="true" class="content">
   <ion-list>
-    <ion-item *ngFor = "let evento of eventosCollection">
+
+    
+    <ion-item *ngFor="let evento of eventosCollection">
       <ion-label>
 
-      <ion-label class= "ion-text-wrap"><h1><b>{{evento.descricao}}</b></h1></ion-label>
-      <ion-label class="ion-text-wrap"><h3>{{arrumarData(evento.dtHrCriado)}}</h3></ion-label> 
-      <ion-label class="ion-text-wrap"><h2>{{evento.detalhe}}</h2></ion-label>
-      
+        <ion-label class="ion-text-wrap">
+          <h2>{{statusObjeto(evento.codigo)}}</h2>
+        </ion-label>
+
+        <ion-label class="ion-text-wrap">
+          <h1><b>{{reduzirDescricao(evento.descricao)}}</b></h1>
+        </ion-label>
+
+        <ion-label class="ion-text-wrap">
+          <h3>{{arrumarData(evento.dtHrCriado)}}</h3>
+        </ion-label>
+
+        <ion-label class="ion-text-wrap">
+          <h2>{{evento.detalhe}}</h2>
+        </ion-label>
+
       </ion-label>
 
     </ion-item>
