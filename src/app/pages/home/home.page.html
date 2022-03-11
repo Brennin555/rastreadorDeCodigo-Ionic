@@ -14,8 +14,7 @@
 
   <ion-toolbar color="warning">
     <ion-title class="title-status" color="primary" slot="start"><b>Status:</b></ion-title>
-    
-    <ion-icon class="icon-status" name= "checkmark-circle-outline" 
+    <ion-icon class="icon-status" name= {{statusObjeto(eventosCollection[0].codigo)}} 
     color="primary" slot="end"  size="large">
     </ion-icon>
  
@@ -25,13 +24,10 @@
 
 <ion-content [fullscreen]="true" class="content">
   <ion-list>
-
-    
     <ion-item *ngFor="let evento of eventosCollection">
       <ion-label>
-
         <ion-label class="ion-text-wrap">
-          <h2>{{statusObjeto(evento.codigo)}}</h2>
+          <ion-icon name = "{{statusObjeto(evento.codigo)}}"></ion-icon>
         </ion-label>
 
         <ion-label class="ion-text-wrap">
@@ -45,9 +41,7 @@
         <ion-label class="ion-text-wrap">
           <h2>{{evento.detalhe}}</h2>
         </ion-label>
-
       </ion-label>
-
     </ion-item>
   </ion-list>
 </ion-content>

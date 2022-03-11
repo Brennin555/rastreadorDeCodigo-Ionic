@@ -10,13 +10,12 @@ import { CorreioService } from 'src/app/services/correio.service';
 export class HomePage {
   correio : any = {};
   eventosCollection: any[] = [];
-  //icone : string = "car";
+  icone : any;
 
   constructor(private correioService: CorreioService, private toastCtrl: ToastController, private alertCtrl: AlertController) {}
 
   localizarObjeto(evento){
-    let codigoObjeto: string = evento.detail.value;
-   
+    let codigoObjeto: string = evento.detail.value;   
     if(codigoObjeto.length<3){
       return;
     }
@@ -34,11 +33,14 @@ export class HomePage {
       }
       console.table(this.eventosCollection);
     })
-    .catch(erro=>{ // Nem o meu nem o do professor
+    .catch(erro=>{ // Nem o meu nem o do professor estavam funcionando
       console.log(erro);
       this.enviarToast('Objeto não encontrado.');
-      //this.enviarAlert('Objeto não encontrado.');
     });
+
+    //this.icone = this.statusObjeto(codigo);
+    console.log(this.eventosCollection);
+
   }
   
   async enviarToast(mensagem : string){
@@ -90,8 +92,8 @@ export class HomePage {
     return diaUpdate[3] + ' - ' +horaUpdate;
   }
 
-  async statusObjeto(codigo : string){
-    let icone: string, cor: string = 'success';
+   statusObjeto(codigo : any){
+    let icone: string;
 
     if(codigo == 'BDI'){
       icone = "checkmark-circle";
@@ -105,7 +107,7 @@ export class HomePage {
       }       
     }
 
-    console.log(icone);
+    console.log(codigo);
     return icone;
   }
 
