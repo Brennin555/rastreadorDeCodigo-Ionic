@@ -33,7 +33,7 @@ export class HomePage {
       }
       console.table(this.eventosCollection);
     })
-    .catch(erro=>{ // Nem o meu nem o do professor estavam funcionando
+    .catch(erro=>{
       console.log(erro);
       this.enviarToast('Objeto não encontrado.');
     });
@@ -56,27 +56,6 @@ export class HomePage {
     toast.present();
   }
 
-  async enviarAlert(mensagem : string){
-    const alert = await this.alertCtrl.create({
-    message: mensagem,
-    buttons:[{ 
-      text: 'OK', 
-      role: 'cancel'
-    }]
-    });
-    alert.present();
-  }
-
-  async presentAlert(mensagem: string) {
-    const alert = await this.alertCtrl.create({
-      header: 'ERRO',
-      message: mensagem,
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
-
   arrumarData(dtHrCriado : string){
     
     let dataArrumada = dtHrCriado.split('T')
@@ -86,8 +65,6 @@ export class HomePage {
 
     let horaUpdate = dataArrumada[1].substr(-10,5);
     horaUpdate = horaUpdate.replace(':','h');
-    
-    //console.log(diaUpdate);
     
     return diaUpdate[3] + ' - ' +horaUpdate;
   }
@@ -103,7 +80,7 @@ export class HomePage {
         icone = "checkmark-circle-outline";
       }
       else{
-        icone = "time";
+        icone = "time-outline";
       }       
     }
 
