@@ -14,11 +14,11 @@
 
   <ion-toolbar color="warning">
     <ion-title class="title-status" color="primary" slot="start"><b>Status:</b></ion-title>
-    <ion-icon class="icon-status" name= {{statusObjeto(eventosCollection[0].codigo)}} 
-    color="primary" slot="end"  size="large">
+    <ion-icon class="icon-status" *ngIf="eventosCollection && eventosCollection.length > 0" 
+      name="{{statusObjeto(eventosCollection[0].codigo)}}" color="primary" slot="end" size="large">
     </ion-icon>
- 
   </ion-toolbar>
+  
 
 </ion-header>
 

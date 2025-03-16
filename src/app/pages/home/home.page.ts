@@ -11,11 +11,14 @@ export class HomePage {
   correio : any = {};
   eventosCollection: any[] = [];
   icone : any;
+  codigo = '';
+
 
   constructor(private correioService: CorreioService, private toastCtrl: ToastController, private alertCtrl: AlertController) {}
 
   localizarObjeto(evento){
-    let codigoObjeto: string = evento.detail.value;   
+    let codigoObjeto: string;
+    codigoObjeto = evento.detail.value;   
     if(codigoObjeto.length<3){
       return;
     }
